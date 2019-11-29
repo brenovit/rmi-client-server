@@ -32,5 +32,7 @@ public interface CarFacade extends Remote {
     * @throws RemoteException 远程调用异常
     */
    List<Car> getByColor(String color) throws RemoteException;
+   
+   void showIp(String ip) throws RemoteException;
 
 }

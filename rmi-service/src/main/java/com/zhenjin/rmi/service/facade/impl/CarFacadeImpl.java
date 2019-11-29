@@ -1,6 +1,7 @@
 package com.zhenjin.rmi.service.facade.impl;
 
 
+import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
@@ -11,11 +12,9 @@ import org.springframework.stereotype.Service;
 import com.zhenjin.rmi.entity.Car;
 import com.zhenjin.rmi.facade.CarFacade;
 
-/**
- * RMI服务接口实现
- *
- * @author ZhenJin
- */
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Service
 public class CarFacadeImpl implements CarFacade {
 
@@ -43,5 +42,11 @@ public class CarFacadeImpl implements CarFacade {
         //根据用户名从数据库取出对应的用户信息
         return carList.stream().filter(t -> t.getColor().equals(color)).collect(Collectors.toList());
     }
+
+
+	@Override
+	public void showIp(String ip) throws RemoteException {
+		log.info("Client connected from {}", ip);		
+	}
 
 }

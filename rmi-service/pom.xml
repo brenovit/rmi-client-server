@@ -17,6 +17,7 @@
 	
 	<properties>
 		<skipTest>true</skipTest>
+		<log4j-core.version>2.3</log4j-core.version>		
 	</properties>
 	
 	<build>
@@ -46,6 +47,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j-core.version}</version>
 		</dependency>
 
 	</dependencies>

@@ -3,6 +3,8 @@ package com.zhenjin.rmi.client.controller;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,9 @@ import com.zhenjin.rmi.entity.User;
 import com.zhenjin.rmi.facade.CarFacade;
 import com.zhenjin.rmi.facade.UserFacade;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @RestController
 @RequestMapping("/rmi")
 public class RmiController {
@@ -24,7 +29,8 @@ public class RmiController {
     private CarFacade carFacade;
     
 	@GetMapping(value = "/")
-	public String test() {
+	public String test(HttpServletRequest request) {
+		show(request.getRemoteAddr());
 		userByNameTest();
 		userBySexTest();
 		carByModelTest();
@@ -32,10 +38,19 @@ public class RmiController {
 		return "OK";
 	}
 	
+	public void show(String ip) {
+		log.info("Received message from {}", ip);
+		try {
+			carFacade.showIp(ip);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
     public void userByNameTest() {
         try {
             User zhenJin = userFacade.getByName("ZhenJin");
-            System.out.println("=======> " + zhenJin + " <=======");
+            log.info("=======> " + zhenJin + " <=======");
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -53,7 +68,7 @@ public class RmiController {
     public void carByModelTest() {
         try {
             Car uno = carFacade.getByModel("uno");
-            System.out.println("=======> " + uno + " <=======");
+            log.info("=======> " + uno + " <=======");
         } catch (RemoteException e) {
             e.printStackTrace();
         }
