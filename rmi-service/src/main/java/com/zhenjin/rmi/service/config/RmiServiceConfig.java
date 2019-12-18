@@ -21,7 +21,7 @@ public class RmiServiceConfig {
         rmiServiceExporter.setServiceName("UserFacade");
         rmiServiceExporter.setService(facade);
         rmiServiceExporter.setServiceInterface(UserFacade.class);
-        rmiServiceExporter.setRegistryPort(1101);
+        rmiServiceExporter.setRegistryPort(3700);
         return rmiServiceExporter;
     }
     
@@ -31,7 +31,7 @@ public class RmiServiceConfig {
         rmiServiceExporter.setServiceName("CarFacade");
         rmiServiceExporter.setService(facade);
         rmiServiceExporter.setServiceInterface(CarFacade.class);
-        rmiServiceExporter.setRegistryPort(1101);
+        rmiServiceExporter.setRegistryPort(3700);
         return rmiServiceExporter;
     }
 
